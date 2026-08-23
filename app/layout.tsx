@@ -14,13 +14,30 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
+const SITE_URL = "https://pennywisemoney.com";
+const SITE_TITLE = "PennyWise — Financial Guidance for Newcomers to Canada";
+const SITE_DESCRIPTION =
+  "Practical financial guidance for immigrants building a new life in Canada — credit, banking, taxes, and more, explained clearly.";
+
 export const metadata: Metadata = {
+  metadataBase: new URL(SITE_URL),
   title: {
-    default: "PennyWise — Financial Guidance for Newcomers to Canada",
+    default: SITE_TITLE,
     template: "%s — PennyWise",
   },
-  description:
-    "Practical financial guidance for immigrants building a new life in Canada — credit, banking, taxes, and more, explained clearly.",
+  description: SITE_DESCRIPTION,
+  openGraph: {
+    type: "website",
+    url: SITE_URL,
+    siteName: "PennyWise",
+    title: SITE_TITLE,
+    description: SITE_DESCRIPTION,
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: SITE_TITLE,
+    description: SITE_DESCRIPTION,
+  },
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {

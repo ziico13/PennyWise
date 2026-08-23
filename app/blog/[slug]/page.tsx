@@ -24,6 +24,19 @@ export async function generateMetadata({
   return {
     title: meta.title,
     description: meta.description,
+    openGraph: {
+      type: "article",
+      title: meta.title,
+      description: meta.description,
+      publishedTime: meta.date,
+      authors: [meta.author],
+      url: `/blog/${slug}`,
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: meta.title,
+      description: meta.description,
+    },
   };
 }
 
@@ -43,8 +56,29 @@ export default async function BlogPostPage({
   const { content, data } = matter(raw);
   const meta = getPostMeta(slug);
 
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    headline: meta.title,
+    description: meta.description,
+    datePublished: meta.date,
+    author: {
+      "@type": "Organization",
+      name: meta.author,
+    },
+    publisher: {
+      "@type": "Organization",
+      name: "PennyWise",
+    },
+    mainEntityOfPage: `https://pennywisemoney.com/blog/${slug}`,
+  };
+
   return (
     <article className="mx-auto max-w-3xl px-6 py-16">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       <header className="mb-10">
         <h1 className="text-3xl font-semibold tracking-tight sm:text-4xl">
           {data.title}
