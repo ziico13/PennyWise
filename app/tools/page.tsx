@@ -13,6 +13,12 @@ const TOOLS = [
     description:
       "Estimate your take-home pay by province, after federal and provincial tax, CPP, and EI.",
   },
+  {
+    href: "/tools/mortgage-calculator",
+    title: "Mortgage payment calculator",
+    description:
+      "Estimate your mortgage payment by home price, down payment, rate, and amortization — including CMHC insurance.",
+  },
 ];
 
 export default function ToolsPage() {
