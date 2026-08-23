@@ -48,3 +48,17 @@ export function getAllPosts(): PostMeta[] {
     .map(getPostMeta)
     .sort((a, b) => (a.date < b.date ? 1 : -1));
 }
+
+export function getAllTags(): string[] {
+  const tags = new Set<string>();
+  for (const post of getAllPosts()) {
+    for (const tag of post.tags) {
+      if (tag !== "newcomers") tags.add(tag);
+    }
+  }
+  return Array.from(tags).sort();
+}
+
+export function getPostsByTag(tag: string): PostMeta[] {
+  return getAllPosts().filter((post) => post.tags.includes(tag));
+}

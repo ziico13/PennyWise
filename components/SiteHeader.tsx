@@ -16,6 +16,9 @@ export function SiteHeader() {
           <Link href="/" className="transition-colors hover:text-accent">
             Articles
           </Link>
+          <Link href="/tools" className="transition-colors hover:text-accent">
+            Tools
+          </Link>
           <Link href="/about" className="transition-colors hover:text-accent">
             About
           </Link>

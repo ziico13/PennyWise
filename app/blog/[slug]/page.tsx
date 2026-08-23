@@ -6,9 +6,9 @@ import { MDXRemote } from "next-mdx-remote/rsc";
 import { getAllSlugs, getPostMeta } from "@/lib/posts";
 import { AffiliateDisclosure } from "@/components/AffiliateDisclosure";
 import { TagBadge } from "@/components/TagBadge";
-import { PaycheckCalculator } from "@/components/PaycheckCalculator";
+import { ToolCallout } from "@/components/ToolCallout";
 
-const mdxComponents = { PaycheckCalculator };
+const mdxComponents = { ToolCallout };
 
 const POSTS_DIR = path.join(process.cwd(), "content", "posts");
 
