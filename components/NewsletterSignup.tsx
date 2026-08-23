@@ -1,7 +1,9 @@
-const FORM_ACTION = process.env.NEXT_PUBLIC_CONVERTKIT_FORM_ACTION;
+const USERNAME = process.env.NEXT_PUBLIC_BUTTONDOWN_USERNAME;
 
 export function NewsletterSignup({ compact = false }: { compact?: boolean }) {
-  if (!FORM_ACTION) return null;
+  if (!USERNAME) return null;
+
+  const action = `https://buttondown.com/api/emails/embed-subscribe/${USERNAME}`;
 
   return (
     <div
@@ -18,21 +20,22 @@ export function NewsletterSignup({ compact = false }: { compact?: boolean }) {
         One practical article at a time. No spam, unsubscribe anytime.
       </p>
       <form
-        action={FORM_ACTION}
+        action={action}
         method="post"
         className="mt-4 flex flex-col gap-2 sm:flex-row"
       >
-        <label htmlFor="email_address" className="sr-only">
+        <label htmlFor="email" className="sr-only">
           Email address
         </label>
         <input
-          id="email_address"
+          id="email"
           type="email"
-          name="email_address"
+          name="email"
           required
           placeholder="you@example.com"
           className="min-w-0 flex-1 rounded-lg border border-black/10 bg-white px-3 py-2 text-sm text-foreground outline-none focus:border-accent dark:border-white/10 dark:bg-black"
         />
+        <input type="hidden" name="embed" value="1" />
         <button
           type="submit"
           className="rounded-lg bg-accent px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-accent/90"
