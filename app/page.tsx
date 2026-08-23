@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { getAllPosts } from "@/lib/posts";
+import { TagBadge } from "@/components/TagBadge";
 
 export default function Home() {
   const posts = getAllPosts();
@@ -17,11 +18,21 @@ export default function Home() {
         </p>
       </section>
 
-      <section className="flex flex-col gap-10">
+      <section className="flex flex-col gap-4">
         {posts.map((post) => (
           <article key={post.slug} className="group">
-            <Link href={`/blog/${post.slug}`} className="block">
-              <h2 className="text-xl font-semibold tracking-tight group-hover:underline">
+            <Link
+              href={`/blog/${post.slug}`}
+              className="block rounded-xl border border-transparent p-5 -mx-5 transition-all duration-200 hover:border-black/10 hover:bg-black/[0.03] hover:shadow-sm dark:hover:border-white/10 dark:hover:bg-white/[0.03]"
+            >
+              <div className="mb-2 flex flex-wrap gap-2">
+                {post.tags
+                  .filter((tag) => tag !== "newcomers")
+                  .map((tag) => (
+                    <TagBadge key={tag} tag={tag} />
+                  ))}
+              </div>
+              <h2 className="text-xl font-semibold tracking-tight transition-colors group-hover:text-accent">
                 {post.title}
               </h2>
               <p className="mt-2 text-zinc-600 dark:text-zinc-400">

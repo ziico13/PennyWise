@@ -5,6 +5,10 @@ import matter from "gray-matter";
 import { MDXRemote } from "next-mdx-remote/rsc";
 import { getAllSlugs, getPostMeta } from "@/lib/posts";
 import { AffiliateDisclosure } from "@/components/AffiliateDisclosure";
+import { TagBadge } from "@/components/TagBadge";
+import { PaycheckCalculator } from "@/components/PaycheckCalculator";
+
+const mdxComponents = { PaycheckCalculator };
 
 const POSTS_DIR = path.join(process.cwd(), "content", "posts");
 
@@ -96,12 +100,19 @@ export default async function BlogPostPage({
           <span aria-hidden="true">&middot;</span>
           <span>{data.author}</span>
         </div>
+        <div className="mt-4 flex flex-wrap gap-2">
+          {meta.tags
+            .filter((tag) => tag !== "newcomers")
+            .map((tag) => (
+              <TagBadge key={tag} tag={tag} />
+            ))}
+        </div>
       </header>
 
       {meta.hasAffiliateLinks && <AffiliateDisclosure />}
 
       <div className="prose prose-zinc dark:prose-invert max-w-none">
-        <MDXRemote source={content} />
+        <MDXRemote source={content} components={mdxComponents} />
       </div>
     </article>
   );
