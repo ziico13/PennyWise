@@ -62,3 +62,22 @@ export function getAllTags(): string[] {
 export function getPostsByTag(tag: string): PostMeta[] {
   return getAllPosts().filter((post) => post.tags.includes(tag));
 }
+
+export function getRelatedPosts(slug: string, limit = 3): PostMeta[] {
+  const current = getPostMeta(slug);
+  const others = getAllPosts().filter((post) => post.slug !== slug);
+
+  const scored = others.map((post) => {
+    const sharedTags = post.tags.filter((tag) =>
+      current.tags.includes(tag)
+    ).length;
+    return { post, sharedTags };
+  });
+
+  scored.sort((a, b) => {
+    if (b.sharedTags !== a.sharedTags) return b.sharedTags - a.sharedTags;
+    return a.post.date < b.post.date ? 1 : -1;
+  });
+
+  return scored.slice(0, limit).map(({ post }) => post);
+}
