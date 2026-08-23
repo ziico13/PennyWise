@@ -28,6 +28,16 @@ export default function AboutPage() {
           substitute for advice from a licensed professional who knows your
           specific situation.
         </p>
+        <h2>How this site makes money</h2>
+        <p>
+          Some articles include links to financial products &mdash; credit
+          cards, banking, or money transfer services &mdash; that pay
+          PennyWise a commission if you sign up through them, at no extra
+          cost to you. Any article that does this says so clearly near the
+          top. We only link to products we&apos;d genuinely recommend to a
+          newcomer regardless of the commission, and a company paying us
+          never changes what we say about it.
+        </p>
       </div>
     </div>
   );

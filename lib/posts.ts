@@ -13,6 +13,7 @@ export type PostMeta = {
   author: string;
   tags: string[];
   readingTime: string;
+  hasAffiliateLinks: boolean;
 };
 
 function readPostFile(slug: string) {
@@ -38,6 +39,7 @@ export function getPostMeta(slug: string): PostMeta {
     author: data.author,
     tags: data.tags ?? [],
     readingTime: readingTime(content).text,
+    hasAffiliateLinks: data.hasAffiliateLinks ?? false,
   };
 }
 

@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import matter from "gray-matter";
 import { MDXRemote } from "next-mdx-remote/rsc";
 import { getAllSlugs, getPostMeta } from "@/lib/posts";
+import { AffiliateDisclosure } from "@/components/AffiliateDisclosure";
 
 const POSTS_DIR = path.join(process.cwd(), "content", "posts");
 
@@ -62,6 +63,8 @@ export default async function BlogPostPage({
           <span>{data.author}</span>
         </div>
       </header>
+
+      {meta.hasAffiliateLinks && <AffiliateDisclosure />}
 
       <div className="prose prose-zinc dark:prose-invert max-w-none">
         <MDXRemote source={content} />
