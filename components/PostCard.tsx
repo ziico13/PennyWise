@@ -5,6 +5,12 @@ import { TagBadge } from "@/components/TagBadge";
 export function PostCard({ post }: { post: PostMeta }) {
   return (
     <article className="group relative rounded-xl border border-transparent p-5 -mx-5 transition-all duration-200 hover:border-black/10 hover:bg-black/[0.03] hover:shadow-sm dark:hover:border-white/10 dark:hover:bg-white/[0.03]">
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img
+        src={`/blog/${post.slug}/opengraph-image`}
+        alt=""
+        className="mb-4 aspect-[1200/630] w-full rounded-lg object-cover"
+      />
       <div className="relative z-10 mb-2 flex flex-wrap gap-2">
         {post.tags
           .filter((tag) => tag !== "newcomers")

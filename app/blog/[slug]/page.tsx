@@ -11,6 +11,7 @@ import { TagBadge } from "@/components/TagBadge";
 import { ToolCallout } from "@/components/ToolCallout";
 import { PostCard } from "@/components/PostCard";
 import { NewsletterSignup } from "@/components/NewsletterSignup";
+import { GiscusComments } from "@/components/GiscusComments";
 
 const mdxComponents = { ToolCallout };
 
@@ -122,6 +123,13 @@ export default async function BlogPostPage({
         </div>
       </header>
 
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img
+        src={`/blog/${slug}/opengraph-image`}
+        alt=""
+        className="mb-10 aspect-[1200/630] w-full rounded-xl object-cover"
+      />
+
       {meta.hasAffiliateLinks && <AffiliateDisclosure />}
 
       <div className="prose prose-zinc dark:prose-invert max-w-none">
@@ -130,6 +138,10 @@ export default async function BlogPostPage({
 
       <div className="mt-12">
         <NewsletterSignup />
+      </div>
+
+      <div className="mt-16 border-t border-black/10 pt-10 dark:border-white/10">
+        <GiscusComments />
       </div>
 
       {relatedPosts.length > 0 && (
