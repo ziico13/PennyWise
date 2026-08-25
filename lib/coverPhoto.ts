@@ -13,8 +13,16 @@ const TAG_QUERIES: Record<string, string> = {
 };
 
 const ACCESS_KEY = process.env.UNSPLASH_ACCESS_KEY;
+const APP_NAME = "pennywise";
 
-export async function getCoverPhotoUrl(tag?: string): Promise<string | null> {
+export type CoverPhoto = {
+  url: string;
+  photographerName: string;
+  photographerLink: string;
+  photoLink: string;
+};
+
+export async function getCoverPhoto(tag?: string): Promise<CoverPhoto | null> {
   if (!ACCESS_KEY) return null;
 
   const query = (tag && TAG_QUERIES[tag]) || "canada finance";
@@ -29,7 +37,21 @@ export async function getCoverPhotoUrl(tag?: string): Promise<string | null> {
     );
     if (!res.ok) return null;
     const data = await res.json();
-    return data.results?.[0]?.urls?.regular ?? null;
+    const photo = data.results?.[0];
+    if (!photo) return null;
+
+    if (photo.links?.download_location) {
+      fetch(photo.links.download_location, {
+        headers: { Authorization: `Client-ID ${ACCESS_KEY}` },
+      }).catch(() => {});
+    }
+
+    return {
+      url: photo.urls?.regular,
+      photographerName: photo.user?.name ?? "Unknown",
+      photographerLink: `${photo.user?.links?.html}?utm_source=${APP_NAME}&utm_medium=referral`,
+      photoLink: `${photo.links?.html}?utm_source=${APP_NAME}&utm_medium=referral`,
+    };
   } catch {
     return null;
   }

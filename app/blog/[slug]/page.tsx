@@ -12,7 +12,7 @@ import { ToolCallout } from "@/components/ToolCallout";
 import { PostCard } from "@/components/PostCard";
 import { NewsletterSignup } from "@/components/NewsletterSignup";
 import { Comments } from "@/components/Comments";
-import { getCoverPhotoUrl } from "@/lib/coverPhoto";
+import { getCoverPhoto } from "@/lib/coverPhoto";
 
 const mdxComponents = { ToolCallout };
 
@@ -67,7 +67,7 @@ export default async function BlogPostPage({
   const meta = getPostMeta(slug);
   const relatedPosts = getRelatedPosts(slug);
   const primaryTag = meta.tags.find((tag) => tag !== "newcomers");
-  const photoUrl = await getCoverPhotoUrl(primaryTag);
+  const photo = await getCoverPhoto(primaryTag);
 
   const jsonLd = {
     "@context": "https://schema.org",
@@ -126,12 +126,36 @@ export default async function BlogPostPage({
         </div>
       </header>
 
-      {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img
-        src={photoUrl ?? `/blog/${slug}/opengraph-image`}
-        alt=""
-        className="mb-10 aspect-[1200/630] w-full rounded-xl object-cover"
-      />
+      <div className="relative mb-10">
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src={photo?.url ?? `/blog/${slug}/opengraph-image`}
+          alt=""
+          className="aspect-[1200/630] w-full rounded-xl object-cover"
+        />
+        {photo && (
+          <p className="absolute bottom-2 right-3 z-10 text-xs text-white/70">
+            Photo by{" "}
+            <a
+              href={photo.photographerLink}
+              target="_blank"
+              rel="noopener noreferrer nofollow"
+              className="underline hover:text-white"
+            >
+              {photo.photographerName}
+            </a>{" "}
+            on{" "}
+            <a
+              href={photo.photoLink}
+              target="_blank"
+              rel="noopener noreferrer nofollow"
+              className="underline hover:text-white"
+            >
+              Unsplash
+            </a>
+          </p>
+        )}
+      </div>
 
       {meta.hasAffiliateLinks && <AffiliateDisclosure />}
 
