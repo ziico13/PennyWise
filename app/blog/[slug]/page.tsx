@@ -66,6 +66,13 @@ export default async function BlogPostPage({
   const meta = getPostMeta(slug);
   const relatedPosts = getRelatedPosts(slug);
 
+  const giscusRepo = process.env.GISCUS_REPO;
+  const giscusRepoId = process.env.GISCUS_REPO_ID;
+  const giscusCategory = process.env.GISCUS_CATEGORY;
+  const giscusCategoryId = process.env.GISCUS_CATEGORY_ID;
+  const giscusConfigured =
+    giscusRepo && giscusRepoId && giscusCategory && giscusCategoryId;
+
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "Article",
@@ -140,9 +147,16 @@ export default async function BlogPostPage({
         <NewsletterSignup />
       </div>
 
-      <div className="mt-16 border-t border-black/10 pt-10 dark:border-white/10">
-        <GiscusComments />
-      </div>
+      {giscusConfigured && (
+        <div className="mt-16 border-t border-black/10 pt-10 dark:border-white/10">
+          <GiscusComments
+            repo={giscusRepo}
+            repoId={giscusRepoId}
+            category={giscusCategory}
+            categoryId={giscusCategoryId}
+          />
+        </div>
+      )}
 
       {relatedPosts.length > 0 && (
         <div className="mt-16 border-t border-black/10 pt-10 dark:border-white/10">

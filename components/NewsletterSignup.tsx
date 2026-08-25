@@ -1,4 +1,4 @@
-const USERNAME = process.env.NEXT_PUBLIC_BUTTONDOWN_USERNAME;
+const USERNAME = process.env.BUTTONDOWN_USERNAME;
 
 export function NewsletterSignup({ compact = false }: { compact?: boolean }) {
   if (!USERNAME) return null;
