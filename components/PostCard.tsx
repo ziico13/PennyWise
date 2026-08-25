@@ -1,13 +1,17 @@
 import Link from "next/link";
 import type { PostMeta } from "@/lib/posts";
 import { TagBadge } from "@/components/TagBadge";
+import { getCoverPhotoUrl } from "@/lib/coverPhoto";
 
-export function PostCard({ post }: { post: PostMeta }) {
+export async function PostCard({ post }: { post: PostMeta }) {
+  const primaryTag = post.tags.find((tag) => tag !== "newcomers");
+  const photoUrl = await getCoverPhotoUrl(primaryTag);
+
   return (
     <article className="group relative rounded-xl border border-transparent p-5 -mx-5 transition-all duration-200 hover:border-black/10 hover:bg-black/[0.03] hover:shadow-sm dark:hover:border-white/10 dark:hover:bg-white/[0.03]">
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img
-        src={`/blog/${post.slug}/opengraph-image`}
+        src={photoUrl ?? `/blog/${post.slug}/opengraph-image`}
         alt=""
         className="mb-4 aspect-[1200/630] w-full rounded-lg object-cover"
       />

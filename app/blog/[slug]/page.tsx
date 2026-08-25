@@ -11,7 +11,8 @@ import { TagBadge } from "@/components/TagBadge";
 import { ToolCallout } from "@/components/ToolCallout";
 import { PostCard } from "@/components/PostCard";
 import { NewsletterSignup } from "@/components/NewsletterSignup";
-import { GiscusComments } from "@/components/GiscusComments";
+import { Comments } from "@/components/Comments";
+import { getCoverPhotoUrl } from "@/lib/coverPhoto";
 
 const mdxComponents = { ToolCallout };
 
@@ -65,13 +66,8 @@ export default async function BlogPostPage({
   const { content, data } = matter(raw);
   const meta = getPostMeta(slug);
   const relatedPosts = getRelatedPosts(slug);
-
-  const giscusRepo = process.env.GISCUS_REPO;
-  const giscusRepoId = process.env.GISCUS_REPO_ID;
-  const giscusCategory = process.env.GISCUS_CATEGORY;
-  const giscusCategoryId = process.env.GISCUS_CATEGORY_ID;
-  const giscusConfigured =
-    giscusRepo && giscusRepoId && giscusCategory && giscusCategoryId;
+  const primaryTag = meta.tags.find((tag) => tag !== "newcomers");
+  const photoUrl = await getCoverPhotoUrl(primaryTag);
 
   const jsonLd = {
     "@context": "https://schema.org",
@@ -132,7 +128,7 @@ export default async function BlogPostPage({
 
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img
-        src={`/blog/${slug}/opengraph-image`}
+        src={photoUrl ?? `/blog/${slug}/opengraph-image`}
         alt=""
         className="mb-10 aspect-[1200/630] w-full rounded-xl object-cover"
       />
@@ -147,16 +143,9 @@ export default async function BlogPostPage({
         <NewsletterSignup />
       </div>
 
-      {giscusConfigured && (
-        <div className="mt-16 border-t border-black/10 pt-10 dark:border-white/10">
-          <GiscusComments
-            repo={giscusRepo}
-            repoId={giscusRepoId}
-            category={giscusCategory}
-            categoryId={giscusCategoryId}
-          />
-        </div>
-      )}
+      <div className="mt-16 border-t border-black/10 pt-10 dark:border-white/10">
+        <Comments slug={slug} />
+      </div>
 
       {relatedPosts.length > 0 && (
         <div className="mt-16 border-t border-black/10 pt-10 dark:border-white/10">
