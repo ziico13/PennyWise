@@ -1,5 +1,6 @@
 import { ImageResponse } from "next/og";
 import { getPostMeta } from "@/lib/posts";
+import { CoverIllustration } from "@/lib/coverIllustrations";
 
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
@@ -21,10 +22,7 @@ export default async function Image({
           height: "100%",
           display: "flex",
           position: "relative",
-          flexDirection: "column",
-          justifyContent: "space-between",
-          padding: "80px",
-          backgroundColor: "#000000",
+          backgroundColor: "#060706",
           color: "#ffffff",
           fontFamily: "sans-serif",
           overflow: "hidden",
@@ -33,48 +31,72 @@ export default async function Image({
         <div
           style={{
             position: "absolute",
-            top: -260,
-            right: -260,
-            width: 620,
-            height: 620,
+            top: -280,
+            right: -180,
+            width: 680,
+            height: 680,
             borderRadius: 9999,
             background:
-              "radial-gradient(circle, rgba(52,211,153,0.35) 0%, rgba(52,211,153,0) 70%)",
+              "radial-gradient(circle, rgba(52,211,153,0.16) 0%, rgba(52,211,153,0) 70%)",
             display: "flex",
           }}
         />
-        <div style={{ display: "flex", alignItems: "center", gap: 14 }}>
-          <div style={{ fontSize: 34, fontWeight: 700 }}>PennyWise</div>
-        </div>
-        <div style={{ display: "flex", flexDirection: "column", gap: 28 }}>
-          {primaryTag && (
+
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "space-between",
+            width: "58%",
+            padding: "72px 40px 72px 72px",
+          }}
+        >
+          <div style={{ display: "flex", fontSize: 32, fontWeight: 700 }}>
+            PennyWise
+          </div>
+          <div style={{ display: "flex", flexDirection: "column", gap: 26 }}>
+            {primaryTag && (
+              <div
+                style={{
+                  display: "flex",
+                  alignSelf: "flex-start",
+                  fontSize: 22,
+                  fontWeight: 600,
+                  color: "#34d399",
+                  backgroundColor: "rgba(52,211,153,0.12)",
+                  padding: "9px 20px",
+                  borderRadius: 9999,
+                  textTransform: "uppercase",
+                  letterSpacing: 2,
+                }}
+              >
+                {primaryTag}
+              </div>
+            )}
             <div
               style={{
                 display: "flex",
-                alignSelf: "flex-start",
-                fontSize: 24,
-                fontWeight: 600,
-                color: "#34d399",
-                backgroundColor: "rgba(52,211,153,0.12)",
-                padding: "10px 22px",
-                borderRadius: 9999,
-                textTransform: "uppercase",
-                letterSpacing: 2,
+                fontSize: 50,
+                fontWeight: 700,
+                lineHeight: 1.2,
               }}
             >
-              {primaryTag}
+              {meta.title}
             </div>
-          )}
-          <div
-            style={{
-              display: "flex",
-              fontSize: 54,
-              fontWeight: 700,
-              lineHeight: 1.2,
-              maxWidth: 1000,
-            }}
-          >
-            {meta.title}
+          </div>
+        </div>
+
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            width: "42%",
+            padding: "80px 80px 80px 20px",
+          }}
+        >
+          <div style={{ display: "flex", width: 340, height: 340 }}>
+            <CoverIllustration tag={primaryTag} />
           </div>
         </div>
       </div>
