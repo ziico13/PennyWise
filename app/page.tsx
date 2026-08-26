@@ -19,21 +19,39 @@ export default function Home() {
         </p>
       </section>
 
-      <Link
-        href="/start-here"
-        className="group mb-14 flex items-center justify-between gap-4 rounded-xl border border-accent/30 bg-accent-soft/60 p-6 transition-colors hover:border-accent dark:bg-accent-soft/20"
-      >
-        <div>
-          <div className="font-semibold text-accent">
-            New here? Start with the roadmap.
+      <div className="mb-14 grid gap-4 sm:grid-cols-2">
+        <Link
+          href="/start-here"
+          className="group flex items-center justify-between gap-4 rounded-xl border border-accent/30 bg-accent-soft/60 p-6 transition-colors hover:border-accent dark:bg-accent-soft/20"
+        >
+          <div>
+            <div className="font-semibold text-accent">
+              New here? Start with the roadmap.
+            </div>
+            <p className="mt-1 text-sm text-zinc-600 dark:text-zinc-400">
+              The four things to get right first, and a shortcut to your
+              situation.
+            </p>
           </div>
-          <p className="mt-1 text-sm text-zinc-600 dark:text-zinc-400">
-            The four things to get right first, and a shortcut to your
-            situation.
-          </p>
-        </div>
-        <ArrowRight className="h-5 w-5 shrink-0 text-accent transition-transform group-hover:translate-x-1" />
-      </Link>
+          <ArrowRight className="h-5 w-5 shrink-0 text-accent transition-transform group-hover:translate-x-1" />
+        </Link>
+
+        <Link
+          href="/settled"
+          className="group flex items-center justify-between gap-4 rounded-xl border border-accent/30 bg-accent-soft/60 p-6 transition-colors hover:border-accent dark:bg-accent-soft/20"
+        >
+          <div>
+            <div className="font-semibold text-accent">
+              Already settled in? Grow what you&apos;ve built.
+            </div>
+            <p className="mt-1 text-sm text-zinc-600 dark:text-zinc-400">
+              A home, retirement, and investing beyond the accounts you
+              started with.
+            </p>
+          </div>
+          <ArrowRight className="h-5 w-5 shrink-0 text-accent transition-transform group-hover:translate-x-1" />
+        </Link>
+      </div>
 
       <section>
         <h2 className="mb-5 text-sm font-semibold uppercase tracking-wide text-zinc-500">
