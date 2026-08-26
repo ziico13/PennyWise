@@ -16,6 +16,9 @@ export function SiteFooter() {
               <Link href="/start-here" className="hover:text-accent">
                 Start Here
               </Link>
+              <Link href="/starter-kit" className="hover:text-accent">
+                Starter Kit
+              </Link>
               <Link href="/tools" className="hover:text-accent">
                 Tools
               </Link>

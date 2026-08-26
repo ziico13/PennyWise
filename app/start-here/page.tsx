@@ -100,6 +100,21 @@ export default function StartHerePage() {
         the topic that matches where you actually are.
       </p>
 
+      <Link
+        href="/starter-kit"
+        className="group mt-8 flex items-center justify-between gap-4 rounded-xl border border-accent/30 bg-accent-soft/60 p-5 transition-colors hover:border-accent dark:bg-accent-soft/20"
+      >
+        <div>
+          <div className="font-semibold text-accent">
+            Get the free Canadian Money Starter Kit
+          </div>
+          <p className="mt-1 text-sm text-zinc-600 dark:text-zinc-400">
+            A downloadable PDF covering everything below, condensed into one
+            printable roadmap.
+          </p>
+        </div>
+      </Link>
+
       <section className="mt-14">
         <h2 className="text-sm font-semibold uppercase tracking-wide text-zinc-500">
           Your first 90 days
