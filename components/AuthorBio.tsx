@@ -1,11 +1,15 @@
-import { UserRound } from "lucide-react";
+import Image from "next/image";
 
 export function AuthorBio() {
   return (
     <div className="flex items-start gap-4 rounded-xl border border-black/10 p-5 dark:border-white/10">
-      <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-accent-soft text-accent">
-        <UserRound className="h-5 w-5" strokeWidth={2} />
-      </div>
+      <Image
+        src="/images/isaac-ogunleye.jpg"
+        alt="Isaac A. Ogunleye"
+        width={44}
+        height={44}
+        className="h-11 w-11 shrink-0 rounded-full object-cover"
+      />
       <div>
         <div className="font-semibold">Isaac A. Ogunleye</div>
         <p className="text-sm text-zinc-500">Chartered Accountant</p>
