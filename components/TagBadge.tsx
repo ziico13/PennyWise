@@ -9,6 +9,8 @@ import {
   Send,
   ShieldAlert,
   Compass,
+  Home,
+  Umbrella,
   type LucideIcon,
 } from "lucide-react";
 
@@ -21,6 +23,8 @@ const TAG_ICONS: Record<string, LucideIcon> = {
   income: Wallet,
   remittances: Send,
   safety: ShieldAlert,
+  housing: Home,
+  insurance: Umbrella,
   newcomers: Compass,
 };
 
