@@ -1,3 +1,5 @@
+import { AuthorBio } from "@/components/AuthorBio";
+
 export const metadata = {
   title: "About",
   description: "What PennyWise is and who it's for.",
@@ -38,6 +40,10 @@ export default function AboutPage() {
           newcomer regardless of the commission, and a company paying us
           never changes what we say about it.
         </p>
+      </div>
+
+      <div className="mt-10 not-prose">
+        <AuthorBio />
       </div>
     </div>
   );

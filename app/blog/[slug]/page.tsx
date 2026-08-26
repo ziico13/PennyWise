@@ -12,6 +12,7 @@ import { ToolCallout } from "@/components/ToolCallout";
 import { PostCard } from "@/components/PostCard";
 import { NewsletterSignup } from "@/components/NewsletterSignup";
 import { Comments } from "@/components/Comments";
+import { AuthorBio } from "@/components/AuthorBio";
 import { getCoverPhoto } from "@/lib/coverPhoto";
 
 const mdxComponents = { ToolCallout };
@@ -76,8 +77,9 @@ export default async function BlogPostPage({
     description: meta.description,
     datePublished: meta.date,
     author: {
-      "@type": "Organization",
+      "@type": "Person",
       name: meta.author,
+      jobTitle: "Chartered Accountant",
     },
     publisher: {
       "@type": "Organization",
@@ -177,6 +179,10 @@ export default async function BlogPostPage({
       </div>
 
       <div className="mt-12">
+        <AuthorBio />
+      </div>
+
+      <div className="mt-8">
         <NewsletterSignup />
       </div>
 
