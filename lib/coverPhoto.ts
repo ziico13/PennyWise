@@ -10,6 +10,7 @@ const TAG_QUERIES: Record<string, string> = {
   housing: "apartment building canada",
   insurance: "insurance umbrella rain",
   family: "family home canada",
+  settled: "canadian suburb house garden",
 };
 
 const ACCESS_KEY = process.env.UNSPLASH_ACCESS_KEY;

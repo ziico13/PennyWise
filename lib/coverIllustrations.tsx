@@ -142,6 +142,18 @@ function Family() {
   );
 }
 
+function Settled() {
+  return (
+    <svg viewBox="0 0 100 100" width="100%" height="100%">
+      <path d="M50,90 L50,50" {...commonProps} />
+      <path d="M50,58 Q30,58 26,38 Q46,38 50,58" {...commonProps} />
+      <path d="M50,50 Q70,50 74,30 Q54,30 50,50" {...commonProps} />
+      <path d="M50,74 Q34,74 30,58 Q46,58 50,74" {...commonProps} />
+      <line x1="30" y1="90" x2="70" y2="90" {...commonProps} />
+    </svg>
+  );
+}
+
 function Compass() {
   return (
     <svg viewBox="0 0 100 100" width="100%" height="100%">
@@ -167,6 +179,7 @@ const ILLUSTRATIONS: Record<string, () => ReactElement> = {
   housing: Housing,
   insurance: Insurance,
   family: Family,
+  settled: Settled,
 };
 
 export function CoverIllustration({ tag }: { tag?: string }) {

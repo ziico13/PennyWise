@@ -6,6 +6,7 @@ import { PiggyBank, Menu, X } from "lucide-react";
 
 const NAV_LINKS = [
   { href: "/start-here", label: "Start Here" },
+  { href: "/settled", label: "Settled In?" },
   { href: "/banking", label: "Banking" },
   { href: "/credit", label: "Credit" },
   { href: "/taxes", label: "Taxes" },

@@ -11,6 +11,7 @@ import {
   Compass,
   Home,
   Umbrella,
+  Sprout,
   type LucideIcon,
 } from "lucide-react";
 
@@ -25,6 +26,7 @@ const TAG_ICONS: Record<string, LucideIcon> = {
   safety: ShieldAlert,
   housing: Home,
   insurance: Umbrella,
+  settled: Sprout,
   newcomers: Compass,
 };
 
