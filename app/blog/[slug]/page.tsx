@@ -116,6 +116,19 @@ export default async function BlogPostPage({
           <span>{meta.readingTime}</span>
           <span aria-hidden="true">&middot;</span>
           <span>{data.author}</span>
+          {meta.updated && (
+            <>
+              <span aria-hidden="true">&middot;</span>
+              <span>
+                Updated{" "}
+                {new Date(meta.updated).toLocaleDateString("en-US", {
+                  year: "numeric",
+                  month: "long",
+                  day: "numeric",
+                })}
+              </span>
+            </>
+          )}
         </div>
         <div className="mt-4 flex flex-wrap gap-2">
           {meta.tags

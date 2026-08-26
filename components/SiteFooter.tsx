@@ -13,14 +13,25 @@ export function SiteFooter() {
               investment advice.
             </p>
             <nav className="mt-4 flex flex-wrap gap-x-4 gap-y-2 text-sm text-zinc-600 dark:text-zinc-400">
-              <Link href="/" className="hover:text-accent">
-                Articles
+              <Link href="/start-here" className="hover:text-accent">
+                Start Here
               </Link>
               <Link href="/tools" className="hover:text-accent">
                 Tools
               </Link>
               <Link href="/about" className="hover:text-accent">
                 About
+              </Link>
+            </nav>
+            <nav className="mt-2 flex flex-wrap gap-x-4 gap-y-2 text-xs text-zinc-500">
+              <Link href="/editorial-policy" className="hover:text-accent">
+                Editorial Policy
+              </Link>
+              <Link href="/disclosure" className="hover:text-accent">
+                Disclosure
+              </Link>
+              <Link href="/disclaimer" className="hover:text-accent">
+                Disclaimer
               </Link>
             </nav>
             <p className="mt-4 text-sm text-zinc-500">

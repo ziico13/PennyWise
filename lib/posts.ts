@@ -10,6 +10,7 @@ export type PostMeta = {
   title: string;
   description: string;
   date: string;
+  updated?: string;
   author: string;
   tags: string[];
   readingTime: string;
@@ -36,6 +37,7 @@ export function getPostMeta(slug: string): PostMeta {
     title: data.title,
     description: data.description,
     date: data.date,
+    updated: data.updated,
     author: data.author,
     tags: data.tags ?? [],
     readingTime: readingTime(content).text,
@@ -61,6 +63,12 @@ export function getAllTags(): string[] {
 
 export function getPostsByTag(tag: string): PostMeta[] {
   return getAllPosts().filter((post) => post.tags.includes(tag));
+}
+
+export function getPostsByTags(tags: string[]): PostMeta[] {
+  return getAllPosts().filter((post) =>
+    post.tags.some((tag) => tags.includes(tag))
+  );
 }
 
 export function getRelatedPosts(slug: string, limit = 3): PostMeta[] {
