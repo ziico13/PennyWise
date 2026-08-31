@@ -2,6 +2,7 @@ import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { getAllPosts } from "@/lib/posts";
 import { PostCard } from "@/components/PostCard";
+import { MacroSnapshot } from "@/components/MacroSnapshot";
 
 export default function Home() {
   const posts = getAllPosts();
@@ -52,6 +53,8 @@ export default function Home() {
           <ArrowRight className="h-5 w-5 shrink-0 text-accent transition-transform group-hover:translate-x-1" />
         </Link>
       </div>
+
+      <MacroSnapshot />
 
       <section>
         <h2 className="mb-5 text-sm font-semibold uppercase tracking-wide text-zinc-500">
