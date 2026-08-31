@@ -154,6 +154,23 @@ function Settled() {
   );
 }
 
+function Markets() {
+  return (
+    <svg viewBox="0 0 100 100" width="100%" height="100%">
+      <line x1="22" y1="20" x2="22" y2="34" {...commonProps} />
+      <rect x="14" y="34" width="16" height="24" rx="2" fill={STROKE} stroke="none" />
+      <line x1="22" y1="58" x2="22" y2="72" {...commonProps} />
+      <line x1="50" y1="12" x2="50" y2="28" {...commonProps} />
+      <rect x="42" y="28" width="16" height="36" rx="2" {...commonProps} />
+      <line x1="50" y1="64" x2="50" y2="80" {...commonProps} />
+      <line x1="78" y1="26" x2="78" y2="40" {...commonProps} />
+      <rect x="70" y="40" width="16" height="20" rx="2" fill={STROKE} stroke="none" />
+      <line x1="78" y1="60" x2="78" y2="74" {...commonProps} />
+      <line x1="8" y1="88" x2="92" y2="88" {...commonProps} />
+    </svg>
+  );
+}
+
 function Compass() {
   return (
     <svg viewBox="0 0 100 100" width="100%" height="100%">
@@ -180,6 +197,7 @@ const ILLUSTRATIONS: Record<string, () => ReactElement> = {
   insurance: Insurance,
   family: Family,
   settled: Settled,
+  markets: Markets,
 };
 
 export function CoverIllustration({ tag }: { tag?: string }) {

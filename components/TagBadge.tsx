@@ -12,6 +12,7 @@ import {
   Home,
   Umbrella,
   Sprout,
+  LineChart,
   type LucideIcon,
 } from "lucide-react";
 
@@ -27,6 +28,7 @@ const TAG_ICONS: Record<string, LucideIcon> = {
   housing: Home,
   insurance: Umbrella,
   settled: Sprout,
+  markets: LineChart,
   newcomers: Compass,
 };
 
