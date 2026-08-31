@@ -30,11 +30,51 @@ async function fetchFredLatest(
   }
 }
 
+// Every FRED series for Canada CPI (OECD-sourced) stopped updating in
+// early-to-mid 2025 — confirmed via FRED's own series search, not just one
+// bad series ID. Statistics Canada's own WDS API is the fix: authoritative,
+// free, no key, and genuinely current. It returns the raw index level, not
+// a pre-computed inflation rate, so we fetch 13 months and compute the
+// year-over-year change ourselves. Vector 41690973 = All-items CPI, Canada
+// (StatCan table 18-10-0004-01).
+async function fetchCanadaInflation(): Promise<{ value: number; date: string } | null> {
+  try {
+    const res = await fetch(
+      "https://www150.statcan.gc.ca/t1/wds/rest/getDataFromVectorsAndLatestNPeriods",
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify([{ vectorId: 41690973, latestN: 13 }]),
+        next: { revalidate: 60 * 60 * 12 },
+      }
+    );
+    if (!res.ok) return null;
+    const data = await res.json();
+    const points = data?.[0]?.object?.vectorDataPoint;
+    if (!Array.isArray(points) || points.length < 13) return null;
+
+    const latest = points[points.length - 1];
+    const yearAgo = points[0];
+    if (!latest || !yearAgo || !yearAgo.value) return null;
+
+    const yoy = ((latest.value - yearAgo.value) / yearAgo.value) * 100;
+    return { value: yoy, date: latest.refPer };
+  } catch {
+    return null;
+  }
+}
+
+// `new Date("2026-07-01")` parses as UTC midnight, and toLocaleDateString
+// then renders it in the server's local timezone — which rolls the date
+// back to June 30 in any timezone behind UTC, silently showing the wrong
+// month for these already-month-level dates. Pin display to UTC so the
+// label always matches the date string that came back from the API.
 function formatDailyDate(iso: string): string {
   return new Date(iso).toLocaleDateString("en-US", {
     year: "numeric",
     month: "short",
     day: "numeric",
+    timeZone: "UTC",
   });
 }
 
@@ -45,6 +85,7 @@ function formatMonthlyDate(iso: string): string {
   return new Date(iso).toLocaleDateString("en-US", {
     year: "numeric",
     month: "long",
+    timeZone: "UTC",
   });
 }
 
@@ -62,7 +103,7 @@ export async function getMacroSnapshot(): Promise<MacroStat[]> {
     fetchFredLatest("DCOILWTICO", "lin"),
     fetchFredLatest("DCOILBRENTEU", "lin"),
     fetchFredLatest("CPIAUCSL", "pc1"),
-    fetchFredLatest("CANCPIALLMINMEI", "pc1"),
+    fetchCanadaInflation(),
   ]);
 
   const stats: MacroStat[] = [];
@@ -100,7 +141,7 @@ export async function getMacroSnapshot(): Promise<MacroStat[]> {
       value: `${caCpi.value.toFixed(1)}%`,
       asOf: formatMonthlyDate(caCpi.date),
       live: true,
-      sourceUrl: "https://fred.stlouisfed.org/series/CANCPIALLMINMEI",
+      sourceUrl: "https://www150.statcan.gc.ca/t1/tbl1/en/tv.action?pid=1810000401",
     });
   }
 
