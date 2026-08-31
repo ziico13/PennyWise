@@ -48,6 +48,7 @@ export async function PostCard({ post }: { post: PostMeta }) {
             year: "numeric",
             month: "long",
             day: "numeric",
+            timeZone: "UTC",
           })}
         </time>
         <span aria-hidden="true">&middot;</span>

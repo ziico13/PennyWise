@@ -112,6 +112,7 @@ export default async function BlogPostPage({
               year: "numeric",
               month: "long",
               day: "numeric",
+              timeZone: "UTC",
             })}
           </time>
           <span aria-hidden="true">&middot;</span>
@@ -127,6 +128,7 @@ export default async function BlogPostPage({
                   year: "numeric",
                   month: "long",
                   day: "numeric",
+                  timeZone: "UTC",
                 })}
               </span>
             </>
