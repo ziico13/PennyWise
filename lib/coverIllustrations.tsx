@@ -171,6 +171,19 @@ function Markets() {
   );
 }
 
+function MarketOutlook() {
+  return (
+    <svg viewBox="0 0 100 100" width="100%" height="100%">
+      <rect x="12" y="18" width="76" height="70" rx="6" {...commonProps} />
+      <line x1="12" y1="36" x2="88" y2="36" {...commonProps} />
+      <line x1="30" y1="10" x2="30" y2="24" {...commonProps} />
+      <line x1="70" y1="10" x2="70" y2="24" {...commonProps} />
+      <path d="M22,64 L40,50 L54,58 L78,44" {...commonProps} />
+      <circle cx="78" cy="44" r="4" fill={STROKE} stroke="none" />
+    </svg>
+  );
+}
+
 function Compass() {
   return (
     <svg viewBox="0 0 100 100" width="100%" height="100%">
@@ -198,6 +211,7 @@ const ILLUSTRATIONS: Record<string, () => ReactElement> = {
   family: Family,
   settled: Settled,
   markets: Markets,
+  "market-outlook": MarketOutlook,
 };
 
 export function CoverIllustration({ tag }: { tag?: string }) {
