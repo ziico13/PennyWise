@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Script from "next/script";
 import { Geist, Geist_Mono } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
 import { SiteHeader } from "@/components/SiteHeader";
@@ -52,11 +51,18 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     >
       <body className="flex min-h-full flex-col bg-white text-foreground dark:bg-black">
         {ADSENSE_CLIENT_ID && (
-          <Script
+          // A plain native <script> tag, deliberately not next/script's
+          // <Script> component: even with strategy="beforeInteractive",
+          // that component only emits a self.__next_s bootstrap array in
+          // the server HTML and injects the real <script> tag client-side
+          // during hydration. Google's AdSense site-verification crawler
+          // does a plain HTTP fetch with no JS execution, so it needs an
+          // actual literal <script src="..."> element in the raw HTML,
+          // which only a native tag (not next/script) reliably produces.
+          <script
             async
             src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${ADSENSE_CLIENT_ID}`}
             crossOrigin="anonymous"
-            strategy="afterInteractive"
           />
         )}
         <SiteHeader />
