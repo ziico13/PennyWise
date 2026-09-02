@@ -13,6 +13,7 @@ import { PostCard } from "@/components/PostCard";
 import { NewsletterSignup } from "@/components/NewsletterSignup";
 import { Comments } from "@/components/Comments";
 import { AuthorBio } from "@/components/AuthorBio";
+import { AdSlot } from "@/components/AdSlot";
 import { getCoverPhoto } from "@/lib/coverPhoto";
 
 const mdxComponents = { ToolCallout };
@@ -69,6 +70,16 @@ export default async function BlogPostPage({
   const relatedPosts = getRelatedPosts(slug);
   const primaryTag = meta.tags.find((tag) => tag !== "newcomers");
   const photo = await getCoverPhoto(primaryTag);
+
+  // Split after the first paragraph so an ad slot can sit inline, without
+  // needing to hand-edit every article's MDX. Every article opens with a
+  // plain intro paragraph before any heading, so the first blank line
+  // reliably marks the end of it; if that assumption ever breaks for a
+  // given file (no blank line found), the whole article just renders as
+  // one block with no ad inserted, rather than erroring.
+  const firstBreak = content.indexOf("\n\n");
+  const introText = firstBreak === -1 ? content : content.slice(0, firstBreak);
+  const restText = firstBreak === -1 ? "" : content.slice(firstBreak + 2);
 
   const jsonLd = {
     "@context": "https://schema.org",
@@ -177,7 +188,9 @@ export default async function BlogPostPage({
       {meta.hasAffiliateLinks && <AffiliateDisclosure />}
 
       <div className="prose prose-zinc dark:prose-invert max-w-none">
-        <MDXRemote source={content} components={mdxComponents} />
+        <MDXRemote source={introText} components={mdxComponents} />
+        <AdSlot />
+        {restText && <MDXRemote source={restText} components={mdxComponents} />}
       </div>
 
       <div className="mt-12">
